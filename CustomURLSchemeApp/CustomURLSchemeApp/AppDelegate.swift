@@ -13,9 +13,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let vc = EmptyStateViewController()
+        vc.title = "No Queries!"
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navVC
+        self.window?.backgroundColor = UIColor.white
+        self.window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        guard let urlHost = url.host,
+        let query = url.query else {
+            return false
+        }
+        
+        if urlHost != "test_page" || url.path != "/one" {
+            return false
+        }
+        
+        let queriesArray = query.components(separatedBy: "&")
+        
+        let mainVC = MainViewController(queries: queriesArray)
+        mainVC.title = "Custom URL scheme"
+        let navVC = UINavigationController(rootViewController: mainVC)
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navVC
+        self.window?.backgroundColor = UIColor.white
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
