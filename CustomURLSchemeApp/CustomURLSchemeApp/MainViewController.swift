@@ -9,12 +9,19 @@
 import UIKit
 import PureLayout
 
+enum QueryDataType {
+    case url
+    case tel
+    case mail
+    case image
+}
+
 class MainViewController: UIViewController {
     
     var queriesArray: [String]
+    var tableViewData = [(String, String)]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var tableViewData = [(String, String)]()
     let cellId = "cellId"
     
     init(queries: [String]) {
@@ -47,9 +54,18 @@ class MainViewController: UIViewController {
             let splitted = query.characters.split{ $0 == "=" }.map(String.init)
             let title = splitted[0]
             let value = splitted[1]
+            let type = self.checkDataType(data: value)
             self.tableViewData.append( (title , value) )
         }
         self.tableView.reloadData()
+    }
+    
+    private func checkDataType(data: String) -> Void {
+        let isEmail = self.isValidEmail(value: data)
+        let validatePhone = self.isPhoneNumber(value: data)
+        let isBase = self.isBase64(value: data)
+        let isurl = self.isURL(value: data)
+        print(isEmail, validatePhone, isBase, isurl)
     }
 
 }
@@ -73,4 +89,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
 

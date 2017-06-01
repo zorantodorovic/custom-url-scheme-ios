@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		84BAE72AB46245F1FBC03771 /* Pods_CustomURLSchemeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87709A5EA3383D908EA660EF /* Pods_CustomURLSchemeApp.framework */; };
+		EBAC27E61EE0B1A60041626B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAC27E51EE0B1A60041626B /* Constants.swift */; };
+		EBAC27EA1EE0C3A40041626B /* MainViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAC27E91EE0C3A40041626B /* MainViewController+Extension.swift */; };
 		EBE4AD291EE088EA000B5F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4AD281EE088EA000B5F36 /* AppDelegate.swift */; };
 		EBE4AD2B1EE088EA000B5F36 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE4AD2A1EE088EA000B5F36 /* MainViewController.swift */; };
 		EBE4AD301EE088EA000B5F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE4AD2F1EE088EA000B5F36 /* Assets.xcassets */; };
@@ -19,6 +21,8 @@
 		079C17E95C7BFD6F4C58B2ED /* Pods-CustomURLSchemeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomURLSchemeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CustomURLSchemeApp/Pods-CustomURLSchemeApp.release.xcconfig"; sourceTree = "<group>"; };
 		0D1E81102105C4D057ABEC5A /* Pods-CustomURLSchemeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomURLSchemeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CustomURLSchemeApp/Pods-CustomURLSchemeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		87709A5EA3383D908EA660EF /* Pods_CustomURLSchemeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CustomURLSchemeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBAC27E51EE0B1A60041626B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EBAC27E91EE0C3A40041626B /* MainViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+Extension.swift"; sourceTree = "<group>"; };
 		EBE4AD251EE088EA000B5F36 /* CustomURLSchemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomURLSchemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE4AD281EE088EA000B5F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBE4AD2A1EE088EA000B5F36 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				EBE4AD311EE088EA000B5F36 /* LaunchScreen.storyboard */,
 				EBE4AD341EE088EA000B5F36 /* Info.plist */,
 				EBE4AD3A1EE0A509000B5F36 /* EmptyStateViewController.swift */,
+				EBAC27E51EE0B1A60041626B /* Constants.swift */,
+				EBAC27E91EE0C3A40041626B /* MainViewController+Extension.swift */,
 			);
 			path = CustomURLSchemeApp;
 			sourceTree = "<group>";
@@ -214,6 +220,8 @@
 				EBE4AD2B1EE088EA000B5F36 /* MainViewController.swift in Sources */,
 				EBE4AD3B1EE0A509000B5F36 /* EmptyStateViewController.swift in Sources */,
 				EBE4AD291EE088EA000B5F36 /* AppDelegate.swift in Sources */,
+				EBAC27EA1EE0C3A40041626B /* MainViewController+Extension.swift in Sources */,
+				EBAC27E61EE0B1A60041626B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
