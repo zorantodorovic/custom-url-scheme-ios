@@ -10,13 +10,9 @@ import UIKit
 import PureLayout
 
 class EmptyStateViewController: UIViewController {
-    
-    let imageString = Constants.base64Image
-    var testLink: URL!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        testLink = URL(string: "myappscheme://test_page/one?token=12345&domain=http://www.foo.com&mail=zoran336@gmail.com&tel=+385958048810&image=\(imageString)")
         self.setTestButton()
     }
 
@@ -31,6 +27,10 @@ class EmptyStateViewController: UIViewController {
     }
     
     func openTestLink() {
+        let urlString = Constants.urlString
+        guard let testLink = URL(string: urlString) else {
+            return
+        }
         UIApplication.shared.open(testLink, options: [:], completionHandler: nil)
     }
     

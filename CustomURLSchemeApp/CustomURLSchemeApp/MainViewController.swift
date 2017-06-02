@@ -14,12 +14,13 @@ enum QueryDataType {
     case tel
     case mail
     case image
+    case unknown
 }
 
 class MainViewController: UIViewController {
     
     var queriesArray: [String]
-    var tableViewData = [(String, String)]()
+    var tableViewData = [(String, String, QueryDataType)]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     let cellId = "cellId"
@@ -54,18 +55,26 @@ class MainViewController: UIViewController {
             let splitted = query.characters.split{ $0 == "=" }.map(String.init)
             let title = splitted[0]
             let value = splitted[1]
-            let type = self.checkDataType(data: value)
-            self.tableViewData.append( (title , value) )
+            let type = self.checkDataType(data: title)
+            print(type)
+            self.tableViewData.append( (title , value, type) )
         }
         self.tableView.reloadData()
     }
     
-    private func checkDataType(data: String) -> Void {
-        let isEmail = self.isValidEmail(value: data)
-        let validatePhone = self.isPhoneNumber(value: data)
-        let isBase = self.isBase64(value: data)
-        let isurl = self.isURL(value: data)
-        print(isEmail, validatePhone, isBase, isurl)
+    private func checkDataType(data: String) -> QueryDataType {
+        switch data {
+        case "tel":
+            return QueryDataType.tel
+        case "url":
+            return QueryDataType.url
+        case "image":
+            return QueryDataType.image
+        case "mail":
+            return QueryDataType.mail
+        default:
+            return QueryDataType.unknown
+        }
     }
 
 }
@@ -85,8 +94,60 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let data = tableViewData[indexPath.row]
         cell.textLabel?.text = "\(data.0): \(data.1)"
         return cell
-        
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellData = tableViewData[indexPath.row]
+        let cellType = cellData.2
+        let dataValue = cellData.1
+        switch cellType {
+        case .url:
+            self.openURLString(data: dataValue)
+        case .tel:
+            self.callPhoneNumber(data: dataValue)
+        case .mail:
+            self.openMail(data: dataValue)
+        case .image:
+            self.openImageView(imageString: dataValue)
+        default:
+            break
+        }
+    }
+    
+}
+
+extension MainViewController {
+    
+    func openURLString(data: String) {
+        guard let url = URL(string: data) else {
+            return
+        }
+        self.openURL(url: url)
+    }
+    
+    func callPhoneNumber(data: String) {
+        guard let phoneURL = URL(string: "telprompt://\(data)") else {
+            return
+        }
+        self.openURL(url: phoneURL)
+    }
+    
+    func openMail(data: String) {
+        guard let mailURL = URL(string: "mailto://\(data)") else {
+            return
+        }
+        self.openURL(url: mailURL)
+    }
+    
+    func openImageView(imageString: String) {
+        let imagePreviewVC = ImagePreviewViewController(image: #imageLiteral(resourceName: "swift-og"))
+        self.navigationController?.pushViewController(imagePreviewVC, animated: true)
+    }
+    
+    func openURL(url: URL) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     
 }
 
