@@ -30,7 +30,7 @@ class ImagePreviewViewController: UIViewController {
     private func setupImageView() {
         view.addSubview(imageView)
         imageView.autoPinEdgesToSuperviewEdges()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.image = self.image
         
         let label = UILabel()

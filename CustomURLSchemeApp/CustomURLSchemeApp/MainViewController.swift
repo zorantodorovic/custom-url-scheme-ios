@@ -52,11 +52,12 @@ class MainViewController: UIViewController {
     
     private func parseQueryData() {
         for query in self.queriesArray {
-            let splitted = query.characters.split{ $0 == "=" }.map(String.init)
+            let splitted = query
+                .characters.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+                .map(String.init)
             let title = splitted[0]
             let value = splitted[1]
             let type = self.checkDataType(data: title)
-            print(type)
             self.tableViewData.append( (title , value, type) )
         }
         self.tableView.reloadData()
@@ -66,7 +67,7 @@ class MainViewController: UIViewController {
         switch data {
         case "tel":
             return QueryDataType.tel
-        case "url":
+        case "url", "domain":
             return QueryDataType.url
         case "image":
             return QueryDataType.image
@@ -79,6 +80,8 @@ class MainViewController: UIViewController {
 
 }
 
+
+// Handle table view delegate methods
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,6 +119,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+
+// Handle deep linking
 extension MainViewController {
     
     func openURLString(data: String) {
@@ -140,7 +145,19 @@ extension MainViewController {
     }
     
     func openImageView(imageString: String) {
-        let imagePreviewVC = ImagePreviewViewController(image: #imageLiteral(resourceName: "swift-og"))
+        let stringPrefix = "data:image/gif;base64,"
+        var imgString = imageString
+        if imageString.hasPrefix(stringPrefix) {
+            imgString = imageString.replacingOccurrences(of: stringPrefix, with: "")
+        }
+        guard let imgData = Data(base64Encoded: imgString, options: .ignoreUnknownCharacters) else {
+            return
+        }
+        
+        guard let img = UIImage(data: imgData) else {
+            return
+        }
+        let imagePreviewVC = ImagePreviewViewController(image: img)
         self.navigationController?.pushViewController(imagePreviewVC, animated: true)
     }
     
