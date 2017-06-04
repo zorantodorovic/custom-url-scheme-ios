@@ -38,7 +38,7 @@ class ImagePreviewViewController: UIViewController {
         label.autoAlignAxis(toSuperviewAxis: .vertical)
         label.autoAlignAxis(toSuperviewAxis: .horizontal)
         label.textColor = UIColor.gray
-        label.text = "Asseco confidential"
+        label.text = "Confidential"
         label.font = UIFont.systemFont(ofSize: 20)
     }
     
